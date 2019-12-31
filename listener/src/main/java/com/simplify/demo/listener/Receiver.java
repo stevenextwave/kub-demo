@@ -3,7 +3,7 @@ package com.simplify.demo.listener;
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 
-@RabbitListener(queues = "test")
+@RabbitListener(queues = "test" , containerFactory = "myRabbitListenerContainerFactory")
 public class Receiver {
 
     private String i = "0";

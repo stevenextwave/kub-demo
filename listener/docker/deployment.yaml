@@ -1,0 +1,30 @@
+kind: Deployment
+apiVersion: extensions/v1beta1
+metadata:
+  name: listener-deployment
+spec:
+  replicas: 2
+
+  selector:
+    matchLabels:
+      deploy: listener
+  
+  template:
+    metadata:
+      labels:
+        deploy: listener
+    spec:
+      containers:
+        - name: web
+          image: stevenextwave/listener:latest
+          env:
+          - name: HOST
+            value: "rabbitmq.default.svc.cluster.local"
+          - name: USERNAME
+            value: "user"
+          - name: PASSWORD
+            value: "Rowzs7GKlN"
+          - name: NAME
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.name

@@ -1,0 +1,26 @@
+kind: Deployment
+apiVersion: extensions/v1beta1
+metadata:
+  name: web-deployment
+spec:
+  replicas: 3
+
+  selector:
+    matchLabels:
+      deploy: web
+  
+  template:
+    metadata:
+      labels:
+        deploy: web
+    spec:
+      containers:
+        - name: web
+          image: stevenextwave/webdemo:latest
+          env:
+          - name: HOST
+            value: "rabbitmq.default.svc.cluster.local"
+          - name: USERNAME
+            value: "user"
+          - name: PASSWORD
+            value: "Rowzs7GKlN"

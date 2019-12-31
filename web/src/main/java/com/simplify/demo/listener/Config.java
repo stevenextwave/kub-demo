@@ -16,7 +16,9 @@ public class Config {
     @Bean
     public Channel channel() throws IOException,TimeoutException   {
         ConnectionFactory factory = new ConnectionFactory();
-        factory.setHost("localhost");
+        factory.setHost(System.getenv("HOST"));
+        factory.setUsername(System.getenv("USERNAME"));
+        factory.setPassword(System.getenv("PASSWORD"));
         Connection connection = factory.newConnection();
         return connection.createChannel();
     }
