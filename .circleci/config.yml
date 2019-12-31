@@ -1,7 +1,7 @@
 version: 2 # use CircleCI 2.0
 jobs: # a collection of steps
-  build: # runs not using Workflows must have a `build` job as entry point
-    working_directory: ~/circleci-demo-java-spring # directory where steps will run
+  build: 
+    working_directory: ~/circleci-demo-java-spring
     docker: # run the steps with Docker
       - image: circleci/openjdk:8-jdk-stretch # ...with this image as the primary container; this is where all `steps` will run
 
@@ -30,5 +30,15 @@ jobs: # a collection of steps
            mvn package
            cd ..
 
+      - setup_remote_docker:
+          docker_layer_caching: true 
+
+      - run: |
+          TAG=1.0.$CIRCLE_BUILD_NUM
+          echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
+          cd web/docker
+          ./build $TAG
+          cd ../../listener/docker
+          ./build $TAG
   
       
