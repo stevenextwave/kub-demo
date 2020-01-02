@@ -19,7 +19,8 @@ public class DemoApplication {
 
     @RequestMapping("/")
     String send(@RequestParam("msg") String message) throws IOException {
-		sender.deliver(message);
+        System.out.println("sending");
+        sender.deliver(message);
         return message;
     }
 

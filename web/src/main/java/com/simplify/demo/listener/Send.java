@@ -18,7 +18,6 @@ public class Send {
 
     public void deliver(String message) throws IOException{
         System.out.println("Sending message " + message);
-        channel.queueDeclare("test", true, false, false, null);
         channel.basicPublish("", "test",
             MessageProperties.PERSISTENT_TEXT_PLAIN,
             message.getBytes());
