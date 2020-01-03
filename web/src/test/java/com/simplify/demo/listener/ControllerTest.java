@@ -23,6 +23,7 @@ public class ControllerTest {
 
     @Before
     public void initMocks(){
+        System.out.println("kakaka");
         MockitoAnnotations.initMocks(this);
     }
 

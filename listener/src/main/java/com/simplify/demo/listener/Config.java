@@ -1,22 +1,16 @@
 package com.simplify.demo.listener;
 
-import org.springframework.amqp.core.Queue;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
-import org.springframework.boot.ApplicationArguments;
 import com.rabbitmq.client.ConnectionFactory;
+
+import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
-import java.util.Set;
+import org.springframework.boot.ApplicationArguments;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class Config {
-
-    @Bean
-    public Queue hello() {
-        return new Queue("test");
-    }
 
     @Bean
     public Receiver receiver(ApplicationArguments args) {
