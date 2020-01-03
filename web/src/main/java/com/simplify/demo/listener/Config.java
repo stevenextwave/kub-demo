@@ -7,6 +7,7 @@ import com.rabbitmq.client.Channel;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Scope;
 
 import java.util.concurrent.TimeoutException;
 import java.io.IOException;
@@ -18,12 +19,15 @@ public class Config {
     @Bean
     @Scope("singleton")
     public Channel channel() throws IOException,TimeoutException   {
+        System.out.println("creating channel");
         ConnectionFactory factory = new ConnectionFactory();
         factory.setHost(System.getenv("HOST"));
         factory.setUsername(System.getenv("USERNAME"));
         factory.setPassword(System.getenv("PASSWORD"));
         Connection connection = factory.newConnection();
-        return connection.createChannel();
+        Channel channel = connection.createChannel();
+        channel.queueDeclare("test", true, false, false, null);
+        return channel;
     }
 
     @Bean
